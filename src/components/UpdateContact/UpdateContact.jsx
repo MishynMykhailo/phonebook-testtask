@@ -1,91 +1,81 @@
 import React, { useState } from "react";
-import s from "./ContactForm.module.css";
-import { addContact } from "../../redux/operations";
+import s from "./UpdateContact.module.css";
+import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getContactValueState } from "../../redux/selectors";
-import Button from "../Button/Button";
+import { updateContact } from "../../redux/operations";
+import { toggleModal } from "../../redux/ModalSlice";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
 
-const ContactForm = () => {
-  const [name, setName] = useState("");
-  const [last_name, setLast_name] = useState("");
-  const [adress, setAdress] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone_number, setPhone_number] = useState("");
-
+const UpdateContact = ({ contactId }) => {
   const dispatch = useDispatch();
   const { items } = useSelector(getContactValueState);
+
+  const { name, last_name, adress, city, country, email, phone_number, id } =
+    items.find(({ id }) => id === contactId);
+
+  const [editName, setEditName] = useState(name);
+  const [editLast_name, setEditLast_name] = useState(last_name);
+  const [editAdress, setEditAdress] = useState(adress);
+  const [editCity, setEditCity] = useState(city);
+  const [editCountry, setEditCountry] = useState(country);
+  const [editEmail, setEditEmail] = useState(email);
+  const [editPhone_number, setEditPhone_number] = useState(phone_number);
 
   const handlerChange = (e) => {
     const { name, value } = e.currentTarget;
     switch (name) {
       case "name":
-        setName(value);
+        setEditName(value);
         break;
       case "last_name":
-        setLast_name(value);
+        setEditLast_name(value);
         break;
       case "adress":
-        setAdress(value);
+        setEditAdress(value);
         break;
       case "city":
-        setCity(value);
+        setEditCity(value);
         break;
       case "country":
-        setCountry(value);
+        setEditCountry(value);
         break;
       case "email":
-        setEmail(value);
+        setEditEmail(value);
         break;
       case "phone_number":
-        setPhone_number(value);
+        setEditPhone_number(value);
         break;
       default:
     }
   };
-  const validateContact = (name) => {
-    const normalizedName = name.toLowerCase();
-    if (items.find(({ name }) => name.toLowerCase() === normalizedName)) {
-      alert(`${name} is already in contacts`);
-    } else {
-      reset();
-      return (
-        dispatch(
-          addContact({
-            name,
-            last_name,
-            adress,
-            city,
-            country,
-            email,
-            phone_number,
-          })
-        ),
-        Notify.success("Contact added")
-      );
-    }
-  };
+
   const handlerSumbit = (e) => {
     e.preventDefault();
     if (name.trim() === "") {
       Notify.failure(`Fill in the fields before adding`);
       return;
     }
-    return validateContact(name);
-  };
-  const reset = () => {
-    setName("");
-    setLast_name("");
-    setAdress("");
-    setCity("");
-    setCountry("");
-    setEmail("");
-    setPhone_number("");
+    return (
+      dispatch(
+        updateContact({
+          contactId,
+          name: editName,
+          last_name: editLast_name,
+          adress: editAdress,
+          city: editCity,
+          country: editCountry,
+          email: editEmail,
+          phone_number: editPhone_number,
+        })
+      ),
+      dispatch(toggleModal()),
+      Notify.success("contact updated")
+    );
   };
   return (
     <>
+      <h2>Update contact</h2>
       <form className={s.form} onSubmit={handlerSumbit}>
         <label className={s.label} htmlFor="name">
           Name
@@ -97,7 +87,7 @@ const ContactForm = () => {
           name="name"
           required
           id="name"
-          value={name}
+          value={editName}
           placeholder="Name"
         />
         <label className={s.label} htmlFor="last_name">
@@ -110,7 +100,7 @@ const ContactForm = () => {
           name="last_name"
           required
           id="last_name"
-          value={last_name}
+          value={editLast_name}
           placeholder="Last Name"
         />
 
@@ -124,7 +114,7 @@ const ContactForm = () => {
           name="adress"
           required
           id="adress"
-          value={adress}
+          value={editAdress}
           placeholder="Street"
         />
 
@@ -138,7 +128,7 @@ const ContactForm = () => {
           name="city"
           required
           id="city"
-          value={city}
+          value={editCity}
           placeholder="City"
         />
 
@@ -152,7 +142,7 @@ const ContactForm = () => {
           name="country"
           required
           id="country"
-          value={country}
+          value={editCountry}
           placeholder="Country"
         />
 
@@ -166,7 +156,7 @@ const ContactForm = () => {
           name="email"
           required
           id="email"
-          value={email}
+          value={editEmail}
           placeholder="myEmail@xxx.xxx"
         />
 
@@ -180,15 +170,15 @@ const ContactForm = () => {
           name="phone_number"
           required
           id="phone_number"
-          value={phone_number}
+          value={editPhone_number}
           placeholder="XXX-XXX-XX-XX"
         />
         <span className={s.button}>
-          <Button type="submit" name="Submit" />
+          <Button type="submit" name="Edit" />
         </span>
       </form>
     </>
   );
 };
 
-export default ContactForm;
+export default UpdateContact;

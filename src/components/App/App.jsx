@@ -1,16 +1,31 @@
-import React from "react";
-import s from "./App.module.css";
-import ContactForm from "../ContactForm/ContactForm";
-import ContactList from "../ContactList/ContactList";
+import React, { lazy } from "react";
+import { Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+import HeaderBar from "../HeaderBar/HeaderBar";
+import Container from "../Container/Container";
+import Loader from "../../pages/Loader/Loader";
+
+const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const ContactFormPage = lazy(() =>
+  import("../../pages/ContactFormPage/ContactFormPage")
+);
+const NotFoundPage = lazy(() =>
+  import("../../pages/NotFoundPage/NotFoundPage")
+);
+
 const App = () => {
   return (
     <>
-      <h1 className={s.div}>Phonebook</h1>
-      <div className={s.div}>
-        <h2>Contacts</h2>
-        <ContactForm />
-        <ContactList />
-      </div>
+      <Suspense fallback={<Loader />}>
+        <Container>
+          <HeaderBar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/add" element={<ContactFormPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Container>
+      </Suspense>
     </>
   );
 };

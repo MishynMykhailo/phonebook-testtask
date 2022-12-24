@@ -1,3 +1,3 @@
 const getContactValueState = (state) => state.contact;
-
-export default getContactValueState;
+const getModalValueState = (state) => state.modal;
+export { getContactValueState, getModalValueState };

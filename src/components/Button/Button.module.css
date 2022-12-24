@@ -1,0 +1,14 @@
+.btn {
+  padding: 10px;
+  font-size: 18px;
+  background-color: teal;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  max-width: 250px;
+  max-height: 70px;
+}
+.btn:hover,
+.btn:focus {
+  background-color: rgb(0, 94, 94);
+}

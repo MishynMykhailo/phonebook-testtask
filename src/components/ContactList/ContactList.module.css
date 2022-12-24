@@ -2,3 +2,60 @@
   display: flex;
   justify-content: space-between;
 }
+.table {
+  min-width: 1100px;
+  background-color: white;
+  text-align: center;
+  align-items: center;
+
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+}
+.thead {
+  background-color: teal;
+  color: white;
+}
+thead > tr {
+  text-transform: uppercase;
+}
+thead > tr > th {
+  padding: 10px;
+}
+tbody > tr:nth-child(even) {
+  background-color: rgb(229, 234, 238);
+}
+tr > td {
+  border: 1px solid black;
+}
+
+/* btn */
+
+.btnDelete {
+  padding: 5px;
+  font-size: 18px;
+  background-color: rgb(201, 3, 3);
+
+  border: none;
+  color: white;
+  max-width: 250px;
+  max-height: 70px;
+}
+.btnDelete:hover,
+.btnDelete:focus {
+  background-color: brown;
+}
+.btnEdit {
+  padding: 5px;
+  font-size: 18px;
+  background-color: rgb(1, 170, 170);
+
+  border: none;
+  color: white;
+  max-width: 250px;
+  max-height: 70px;
+}
+.btnEdit:hover,
+.btnEdit:focus {
+  background-color: teal;
+}
