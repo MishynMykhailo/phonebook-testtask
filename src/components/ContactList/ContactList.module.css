@@ -16,30 +16,41 @@
   background-color: teal;
   color: white;
 }
+
 thead > tr {
   text-transform: uppercase;
 }
 thead > tr > th {
   padding: 10px;
 }
+tbody > tr {
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+tbody > tr:hover {
+  transform: scale(1.02);
+}
+tbody > tr:hover > td {
+  background-color: rgb(226, 226, 226);
+}
 tbody > tr:nth-child(even) {
   background-color: rgb(229, 234, 238);
+}
+tbody > tr:nth-child(odd) {
+  background-color: white;
 }
 tr > td {
   border: 1px solid black;
 }
 
-/* btn */
-
 .btnDelete {
   padding: 5px;
   font-size: 18px;
   background-color: rgb(201, 3, 3);
-
   border: none;
   color: white;
   max-width: 250px;
   max-height: 70px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .btnDelete:hover,
 .btnDelete:focus {
@@ -49,11 +60,11 @@ tr > td {
   padding: 5px;
   font-size: 18px;
   background-color: rgb(1, 170, 170);
-
   border: none;
   color: white;
   max-width: 250px;
   max-height: 70px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .btnEdit:hover,
 .btnEdit:focus {

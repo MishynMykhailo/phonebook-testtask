@@ -45,10 +45,10 @@ const ContactForm = () => {
       default:
     }
   };
-  const validateContact = (name) => {
-    const normalizedName = name.toLowerCase();
-    if (items.find(({ name }) => name.toLowerCase() === normalizedName)) {
-      alert(`${name} is already in contacts`);
+  const validateContact = (email) => {
+    const normalizedEmail = email.toLowerCase();
+    if (items.find(({ email }) => email.toLowerCase() === normalizedEmail)) {
+      alert(`${email} is already in contacts`);
     } else {
       reset();
       return (
@@ -69,11 +69,11 @@ const ContactForm = () => {
   };
   const handlerSumbit = (e) => {
     e.preventDefault();
-    if (name.trim() === "") {
+    if (name.trim() === "" && email.trim() === "") {
       Notify.failure(`Fill in the fields before adding`);
       return;
     }
-    return validateContact(name);
+    return validateContact(email);
   };
   const reset = () => {
     setName("");

@@ -9,6 +9,7 @@ import { fetchContacts, deleteContact } from "../../redux/operations";
 import Modal from "../Modal/Modal";
 import { toggleModal } from "../../redux/ModalSlice";
 import UpdateContact from "../UpdateContact/UpdateContact";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
 
 const ContactList = () => {
   const { modalActive } = useSelector(getModalValueState);
@@ -20,7 +21,9 @@ const ContactList = () => {
   }, [dispatch]);
 
   const handlerDeleteContact = (contactId) => {
-    return dispatch(deleteContact(contactId));
+    return (
+      dispatch(deleteContact(contactId)), Notify.success("Contact deleted")
+    );
   };
 
   return (
