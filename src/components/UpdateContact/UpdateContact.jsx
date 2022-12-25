@@ -11,7 +11,7 @@ const UpdateContact = ({ contactId }) => {
   const dispatch = useDispatch();
   const { items } = useSelector(getContactValueState);
 
-  const { name, last_name, adress, city, country, email, phone_number, id } =
+  const { name, last_name, adress, city, country, email, phone_number } =
     items.find(({ id }) => id === contactId);
 
   const [editName, setEditName] = useState(name);
