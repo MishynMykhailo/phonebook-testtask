@@ -1,8 +1,8 @@
 {
-  "name": "testtask",
+  "name": "phonebook-testtask",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mishynmykhailo.github.io/testtask/",
+  "homepage": "https://mishynmykhailo.github.io/phonebook-testtask/",
   "dependencies": {
     "@redux-devtools/extension": "^3.2.3",
     "@reduxjs/toolkit": "^1.9.1",
