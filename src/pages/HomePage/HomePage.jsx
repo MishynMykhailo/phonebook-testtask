@@ -9,7 +9,7 @@ const Home = () => {
       <Section>
         <div className={s.div}>
           <h2>Contacts</h2>
-          <a href="/add">
+          <a href="add">
             <Button type="button" name="Add contact" />
           </a>
         </div>
